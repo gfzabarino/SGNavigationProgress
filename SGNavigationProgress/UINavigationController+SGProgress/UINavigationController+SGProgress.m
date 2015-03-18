@@ -249,7 +249,8 @@ CGFloat const SGProgressBarHeight = 2.5;
 	}
 	
 	[self resetTitle];
-	progressView.progress = 0.99;	// Trigger animation with progress change
+
+    [progressView cancelAnimations:NO];
 
 	[UIView animateWithDuration:0.2 delay:0  options:( UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveLinear ) animations:^{
 		progressView.progress = 1;
@@ -307,6 +308,8 @@ CGFloat const SGProgressBarHeight = 2.5;
 - (void)setSGProgressPercentage:(float)percentage duration:(float)duration
 {
 	SGProgressView *progressView = [self progressView] ?: [self newProgressView];
+
+    [progressView cancelAnimations:NO];
 
 	[UIView animateWithDuration:duration delay:0.1 options:( UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveLinear ) animations:^{
 		progressView.progress = percentage / 100.f;

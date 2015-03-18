@@ -16,4 +16,9 @@
  */
 @property (nonatomic, assign) float progress;
 
+/**
+ * Cancel all animations with optionally finishing the ongoing animation, if any.
+ */
+- (void)cancelAnimations:(BOOL)complete;
+
 @end

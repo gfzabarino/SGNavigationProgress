@@ -27,6 +27,14 @@
 	}
 }
 
+- (void)cancelAnimations:(BOOL)complete {
+    if (!complete) {
+        id presentationLayer = self.progressBar.layer.presentationLayer;
+        self.progressBar.layer.frame = [presentationLayer frame];
+    }
+    [self.progressBar.layer removeAllAnimations];
+}
+
 #pragma mark - UIView
 
 - (instancetype)initWithFrame:(CGRect)frame
