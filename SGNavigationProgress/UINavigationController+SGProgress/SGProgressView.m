@@ -30,7 +30,14 @@
 - (void)cancelAnimations:(BOOL)complete {
     if (!complete) {
         id presentationLayer = self.progressBar.layer.presentationLayer;
-        self.progressBar.layer.frame = [presentationLayer frame];
+        if (presentationLayer) {
+            CGRect frame = [presentationLayer frame];
+            // fixes a bug in which a progress of 0 leaves a presentation layer frame of
+            // CGRectZero, which makes look animations as if the height of the progress bar would be
+            // also animating
+            frame.size.height = self.progressBar.layer.frame.size.height;
+            self.progressBar.layer.frame = frame;
+        }
     }
     [self.progressBar.layer removeAllAnimations];
 }
